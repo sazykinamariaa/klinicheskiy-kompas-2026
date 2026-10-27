@@ -1,0 +1,24 @@
+Юридический аудит источников — проверка 2026-10-23 18:47
+
+== 1. Удалённые шкалы
+config/scales.json: совпадений SPRAS/RASS/PDSS/ISI/КОП-25 — 0
+config/sources.json: совпадений SPRAS/RASS/PDSS/ISI/КОП-25 — 0
+интерфейс (frontend/src/*.jsx,*.js,*.css): совпадений — 0
+в case_map.json они упомянуты только как «исключены»
+шкалы в реестре: phq9 (с текстом, confirmed_text_from_paper), gad7 (с текстом, confirmed_text_from_kr), hcl33 (без текста, reference_only_no_interface), lsas (без текста, reference_only_no_interface), rus_audit (без текста, reference_only_no_interface), safety_screen (без текста, approved_by_physician)
+
+== 2. Справочно, без текста вопросов
+hcl33: enabled=False, ui_text_allowed=False, items=нет, status=reference_only_no_interface
+lsas: enabled=False, ui_text_allowed=False, items=нет, status=reference_only_no_interface
+rus_audit: enabled=False, ui_text_allowed=False, items=нет, status=reference_only_no_interface
+SRC-HCL33 note: HCL-33 валидирована (Мосолов и соавт., 2021), но права на цифровое воспроизведение не подтверждены. Использование в интерфейсе — после получения разрешения от правообладателя (Jules Angst / авторы русской адаптации)
+
+== 3. С текстом в интерфейсе
+phq9: вопросов 9, enabled=True
+gad7: вопросов 7, enabled=True
+
+== 4. DSM-5-TR и Видаль
+файлы кода с DSM: нет
+упоминания Видаль в коде и конфигах: нет (коды F41.9/F43.9 переведены на МКБ-10 с решением врача)
+SRC-ICD10: Критерии симптомов берутся только из МКБ-10. DSM-5-TR не используется (авторское право APA).
+источник препарата: ['SRC-AVIANDR-GRLS']

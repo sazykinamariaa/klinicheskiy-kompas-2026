@@ -1,0 +1,39 @@
+Проверка правил Авиандра по ОХЛП 2026-10-23 18:49
+
+== ОХЛП 4.3 — противопоказания (красный, блокировка)
+OK   СКФ 59 -> ci_renal (4.3) | состояние contraindicated
+OK   СКФ 60 -> ci_renal нет | состояние indicated_pending_doctor
+OK   эпилепсия -> ci_epilepsy | состояние contraindicated
+OK   Чайлд-Пью A -> ci_hepatic | состояние contraindicated
+OK   Чайлд-Пью B -> ci_hepatic | состояние contraindicated
+OK   Чайлд-Пью C -> ci_hepatic | состояние contraindicated
+OK   ИМАО сейчас -> ci_maoi_concurrent | состояние contraindicated
+OK   ИМАО отменён 10 дн. назад -> ci_maoi_after | состояние contraindicated
+OK   ИМАО отменён 20 дн. назад -> ci_maoi_after нет | состояние indicated_pending_doctor
+
+== ОХЛП 4.5 — взаимодействия
+OK   meds=моклобемид -> h[ix_maoi] is red
+OK   meds=сертралин -> h[ix_serotonergic] is yellow
+OK   meds=трамадол -> h[ix_serotonergic] is yellow
+OK   meds=литий -> h[ix_serotonergic] is yellow
+OK   meds=зверобой -> h[ix_serotonergic] is yellow
+OK   meds=диазепам -> h[ix_sedatives] is yellow
+OK   meds=алпразолам -> h[ix_sedatives] is yellow
+OK   meds=кветиапин -> h[ix_sedatives] is yellow
+OK   meds=галоперидол -> h[ix_sedatives] is yellow
+OK   meds=тербинафин -> h[ix_cyp2d6] is yellow
+OK   meds=дифенгидрамин -> h[ix_cyp2d6] is yellow
+OK   meds=хинидин -> h[ix_cyp2d6] is yellow
+OK   intake q14 o2 -> ix_alcohol
+
+== ОХЛП 4.2/4.4 — 65 лет и старше
+OK   age=70 -> ci_age not in ci_ids and caut_age65 in caut_ids
+
+== Сценарий S2
+СКФ: 48 Состояние: contraindicated Противопоказания: ['ci_renal'] Уровни алертов: []
+OK   S2: назначение заблокировано
+OK   S2: ci_renal, раздел 4.3
+OK   S2: нет экстренного красного алерта
+OK   S2: красный блок в карточке, положительное предложение не формируется | Почечная недостаточность средней или тяжёлой степени, СКФ < 60 мл/мин. Маритупирдин противопоказан при СКФ < 60 мл/мин
+
+ИТОГ: 27 из 27

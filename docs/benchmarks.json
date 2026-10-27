@@ -1,0 +1,68 @@
+{
+  "machine": {
+    "python": "3.13.16",
+    "cpus": 2
+  },
+  "db": "SQLite (WAL), один процесс uvicorn",
+  "response_time": {
+    "card": {
+      "n": 60,
+      "p50_ms": 21.3,
+      "p95_ms": 29.1,
+      "max_ms": 38.6,
+      "mean_ms": 21.7
+    },
+    "patients_list": {
+      "n": 60,
+      "p50_ms": 9.4,
+      "p95_ms": 12.4,
+      "max_ms": 12.9,
+      "mean_ms": 9.6
+    },
+    "inbox": {
+      "n": 60,
+      "p50_ms": 7.5,
+      "p95_ms": 9.3,
+      "max_ms": 11.5,
+      "mean_ms": 7.5
+    },
+    "note": "карточка включает полную оценку правил и проверку препарата"
+  },
+  "red_alert_delivery": {
+    "n": 8,
+    "p50_ms": 382.6,
+    "p95_ms": 384.6,
+    "max_ms": 384.6,
+    "mean_ms": 342.1,
+    "note": "от ответа пациента до первой доставленной записи; в демо каналы push/sms — адаптеры-заглушки, поэтому время не включает сеть оператора"
+  },
+  "load": {
+    "n": 450,
+    "p50_ms": 349.6,
+    "p95_ms": 2057.3,
+    "max_ms": 4801.8,
+    "mean_ms": 543.7,
+    "concurrent_users": 30,
+    "requests": 450,
+    "errors": 0,
+    "wall_s": 12.6,
+    "throughput_rps": 35.6
+  },
+  "backup_restore": {
+    "backup_s": 0.006,
+    "restore_and_check_s": 0.006,
+    "integrity_ok": true,
+    "row_counts_match": true,
+    "counts": {
+      "users": 20,
+      "patients": 13,
+      "alerts": 30,
+      "scale_runs": 14,
+      "audit_log": 619,
+      "proposals": 16
+    },
+    "RPO": "равен интервалу резервного копирования; при копии каждые 15 минут (cron + sqlite .backup / pg_dump) потеря не более 15 минут данных",
+    "RTO": "измеренное время восстановления на демо-объёме см. restore_and_check_s; на боевом объёме замерить отдельно",
+    "note": "в демо журнал WAL уменьшает потерю до последней зафиксированной транзакции при сбое процесса"
+  }
+}
