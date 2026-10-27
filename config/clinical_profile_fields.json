@@ -1,0 +1,201 @@
+{
+  "_meta": {
+    "description": "Структурированные поля клинической карточки. Врач вносит клинические факты (пациент их не знает или не может подтвердить). Каждое поле поддерживает три состояния: «да», «нет», «неизвестно». «Неизвестно» ВСЕГДА даёт «Проверка безопасности не завершена», а не «Противопоказаний нет» (медики 6.3).",
+    "entered_by_default": "doctor"
+  },
+  "fields": [
+    {
+      "id": "dx_icd10",
+      "label": "Диагноз врача (код МКБ-10)",
+      "type": "icd10_picker",
+      "by": "doctor",
+      "note": "проверка показаний к препарату идёт по ЭТОМУ полю, не по гипотезе системы"
+    },
+    {
+      "id": "dx_working_hypothesis",
+      "label": "Профиль симптомов и гипотеза системы",
+      "type": "system_generated",
+      "by": "system"
+    },
+    {
+      "id": "predominant_syndrome",
+      "label": "Преобладающий синдром",
+      "type": "single",
+      "options": [
+        "преобладает тревога",
+        "преобладает депрессивная симптоматика",
+        "сочетание",
+        "недостаточно данных"
+      ],
+      "by": "doctor"
+    },
+    {
+      "id": "birth_date",
+      "label": "Дата рождения",
+      "type": "date",
+      "by": "doctor_or_registration"
+    },
+    {
+      "id": "sex",
+      "label": "Пол",
+      "type": "single",
+      "by": "registration"
+    },
+    {
+      "id": "pregnancy",
+      "label": "Беременность",
+      "type": "tri_state",
+      "by": "doctor",
+      "patient_report_available": true
+    },
+    {
+      "id": "lactation",
+      "label": "Грудное вскармливание",
+      "type": "tri_state",
+      "by": "doctor",
+      "patient_report_available": true
+    },
+    {
+      "id": "egfr_ml_min",
+      "label": "СКФ, мл/мин",
+      "type": "number_with_date",
+      "by": "doctor",
+      "plus": [
+        "дата анализа",
+        "врачебная оценка"
+      ]
+    },
+    {
+      "id": "liver_failure_child_pugh",
+      "label": "Печёночная недостаточность (класс по Чайлд-Пью)",
+      "type": "single",
+      "options": [
+        "нет",
+        "A",
+        "B",
+        "C",
+        "неизвестно"
+      ],
+      "by": "doctor",
+      "note": "повышение АЛТ само по себе не равно установленному классу"
+    },
+    {
+      "id": "epilepsy",
+      "label": "Эпилепсия (подтверждённый диагноз, сведения о приступах)",
+      "type": "tri_state",
+      "by": "doctor"
+    },
+    {
+      "id": "organic_brain_disease",
+      "label": "Органические заболевания головного мозга (медицинская документация)",
+      "type": "tri_state",
+      "by": "doctor",
+      "note": "не делать вывод только по неспецифической жалобе"
+    },
+    {
+      "id": "cardiovascular_disease",
+      "label": "Сердечно-сосудистые заболевания",
+      "type": "tri_state",
+      "by": "doctor",
+      "effect": "осторожность, индивидуальная оценка"
+    },
+    {
+      "id": "maoi_current",
+      "label": "Приём ИМАО сейчас",
+      "type": "tri_state",
+      "by": "doctor"
+    },
+    {
+      "id": "maoi_last_dose_date",
+      "label": "Дата последнего приёма ИМАО и название",
+      "type": "date",
+      "by": "doctor"
+    },
+    {
+      "id": "hypersensitivity",
+      "label": "Гиперчувствительность к действующему или вспомогательным веществам (аллергологический анамнез и состав)",
+      "type": "tri_state",
+      "by": "doctor"
+    },
+    {
+      "id": "drug_allergies",
+      "label": "Лекарственные аллергии и непереносимость (какие препараты или вещества)",
+      "type": "text",
+      "by": "doctor"
+    },
+    {
+      "id": "galactose_lactase_intolerance",
+      "label": "Непереносимость некоторых сахаров (лактоза, галактоза)",
+      "type": "tri_state",
+      "by": "doctor",
+      "note": "по опубликованному описанию; сверить по ОХЛП",
+      "effect": "предупреждение: препарат содержит лактозу; не противопоказание по листку"
+    },
+    {
+      "id": "concomitant_meds",
+      "label": "Принимаемые препараты",
+      "type": "coded_list",
+      "by": "patient_then_doctor_confirms",
+      "dictionary": "МНН/торговые названия + классы (СИОЗС, ТЦА, ИМАО, бензодиазепины, антипсихотики, барбитураты, седативные H1-блокаторы, ингибиторы CYP2D6, серотонинергические: трамадол, триптаны, литий, фентанил, зверобой, L-триптофан)"
+    },
+    {
+      "id": "alcohol_use",
+      "label": "Алкоголь / ПАВ",
+      "type": "structured",
+      "by": "patient"
+    },
+    {
+      "id": "prior_suicide_attempt",
+      "label": "Прошлые попытки",
+      "type": "structured",
+      "by": "doctor_or_patient"
+    },
+    {
+      "id": "access_to_means",
+      "label": "Доступ к опасным средствам",
+      "type": "structured",
+      "by": "doctor"
+    },
+    {
+      "id": "social_support",
+      "label": "Доступная поддержка",
+      "type": "structured",
+      "by": "doctor_or_patient"
+    },
+    {
+      "id": "diabetes_or_endocrine",
+      "label": "Сахарный диабет или другие эндокринные заболевания",
+      "type": "tri_state",
+      "by": "doctor",
+      "effect": "осторожность (листок-вкладыш)"
+    },
+    {
+      "id": "alcohol_or_drug_dependence",
+      "label": "Алкогольная или наркотическая зависимость",
+      "type": "tri_state",
+      "by": "doctor",
+      "effect": "осторожность (листок-вкладыш); связать с q14 и RUS-AUDIT"
+    },
+    {
+      "id": "second_indication_confirmed",
+      "label": "Состояние соответствует второму показанию (тревожное состояние со стрессовой реакцией и нарушением адаптации лёгкой/средней степени, в т.ч. после COVID-19)",
+      "type": "tri_state",
+      "by": "doctor",
+      "status": "draft_by_dev_pending_review",
+      "note": "drug_aviandr.json → gating: при коде F41.9/F43.9 врач вручную подтверждает соответствие второму показанию"
+    },
+    {
+      "id": "meds_confirmed",
+      "label": "Список принимаемых препаратов проверен врачом",
+      "type": "tri_state",
+      "by": "doctor",
+      "status": "draft_by_dev_pending_review",
+      "note": "без подтверждения списка проверка взаимодействий не считается завершённой"
+    }
+  ],
+  "tri_state_semantics": {
+    "yes": "фактор присутствует",
+    "no": "фактор исключён врачом",
+    "unknown": "не проверено -> «Проверка безопасности не завершена»"
+  }
+}

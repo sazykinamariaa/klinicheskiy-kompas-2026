@@ -1,0 +1,565 @@
+{
+  "_meta": {
+    "description": "Связка конфигураций с исполняемым движком. Здесь НЕТ новых клинических значений: пороги, дозы, сроки берутся из остальных файлов config/. Файл говорит только, как называть факты и как читать из ответов анкеты те факты, которые правила из alert_rules.json и routing_rules.json записали прозой. Файл создан разработкой; клиническое содержание отмечено статусом и ждёт одной строки подтверждения медиков.",
+    "status": "draft_by_dev_pending_review",
+    "how_to_extend": "Новое правило добавляется записью в alert_rules.json / routing_rules.json (поле when). Если условие написано прозой, добавьте здесь запись в rule_overrides с выражением на том же языке условий. Код ядра менять не нужно."
+  },
+  "fact_sources": {
+    "_note": "Декларативное чтение фактов из ответов анкеты. kind=option_map: ответ -> значение; option_any: выбран ли хоть один из перечисленных вариантов (False, если вопрос отвечен и ничего не выбрано; None, если не отвечен); option_value: числовое value варианта.",
+    "intake.q4": {
+      "kind": "option_map",
+      "question": "q4",
+      "map": {
+        "o1": "no",
+        "o2": "once",
+        "o3": "repeats",
+        "o4": "unsure"
+      }
+    },
+    "intake.q4b": {
+      "kind": "option_map",
+      "question": "q4b",
+      "map": {
+        "o1": "yes",
+        "o2": "no",
+        "o3": "unsure"
+      }
+    },
+    "intake.q5_avoidance": {
+      "kind": "option_any",
+      "question": "q5",
+      "options": [
+        "o1",
+        "o2",
+        "o3",
+        "o4",
+        "o5",
+        "o6"
+      ]
+    },
+    "intake.q5_social": {
+      "kind": "option_any",
+      "question": "q5",
+      "options": [
+        "o1",
+        "o2"
+      ]
+    },
+    "intake.q6": {
+      "kind": "option_value",
+      "question": "q6"
+    },
+    "intake.q7": {
+      "kind": "option_map",
+      "question": "q7",
+      "map": {
+        "o1": "first",
+        "o2": "one",
+        "o3": "several",
+        "o4": "chronic_no_remission",
+        "o5": "unsure"
+      }
+    },
+    "intake.q8": {
+      "kind": "option_map",
+      "question": "q8",
+      "map": {
+        "o1": "no",
+        "o2": "yes",
+        "o3": "unsure"
+      }
+    },
+    "intake.q12": {
+      "kind": "option_attr",
+      "question": "q12",
+      "attr": "safety_state"
+    },
+    "intake.q13": {
+      "kind": "option_map",
+      "question": "q13",
+      "map": {
+        "o1": "yes",
+        "o2": "no",
+        "o3": "na",
+        "o4": "unsure"
+      }
+    },
+    "intake.q16": {
+      "kind": "option_map",
+      "question": "q16",
+      "map": {
+        "o1": "no",
+        "o2": "yes",
+        "o3": "unresolved"
+      }
+    },
+    "intake.q21": {
+      "kind": "option_map",
+      "question": "q21",
+      "map": {
+        "o1": "yes",
+        "o2": "no",
+        "o3": "unsure"
+      }
+    },
+    "intake.q2_duration": {
+      "kind": "option_map",
+      "question": "q2",
+      "map": {
+        "o1": "days",
+        "o2": "weeks",
+        "o3": "months",
+        "o4": "over_half_year",
+        "o5": "episodic",
+        "o6": "long_varying",
+        "o7": "unsure"
+      }
+    },
+    "intake.substance_or_med_link": {
+      "kind": "any_of",
+      "of": [
+        {
+          "question": "q14c",
+          "options": [
+            "o2"
+          ]
+        },
+        {
+          "question": "q18",
+          "options": [
+            "o6"
+          ]
+        },
+        {
+          "question": "q14",
+          "options": [
+            "o3",
+            "o4"
+          ]
+        }
+      ],
+      "_note": "q14: другие ПАВ или лекарства вне согласованной схемы; q14c: резкая отмена снотворных/успокоительных; q18: симптомы на фоне ухудшения здоровья. Привязка — разработка, ждёт проверки медиков"
+    },
+    "scale_totals": {
+      "phq9": "phq9",
+      "gad7": "gad7",
+      "hcl33_score": "hcl33"
+    },
+    "scale_items": {
+      "phq9_item9": {
+        "scale": "phq9",
+        "item": "phq9_9"
+      }
+    },
+    "intake.q14_alcohol": {
+      "kind": "any_of",
+      "of": [
+        {
+          "question": "q14",
+          "options": [
+            "o1"
+          ]
+        }
+      ],
+      "_note": "анкета, вопрос 14: «Алкоголь»"
+    },
+    "intake.q14_other": {
+      "kind": "any_of",
+      "of": [
+        {
+          "question": "q14",
+          "options": [
+            "o3"
+          ]
+        }
+      ],
+      "_note": "анкета, вопрос 14: «Другие психоактивные вещества»"
+    }
+  },
+  "symptom_map": {
+    "_note": "Какие симптомы критериев (routing_rules.json → symptom_criteria) отражают пункты PHQ-9 и варианты анкеты. Названия симптомов совпадают с текстами критериев в конфигурации. Содержательное сопоставление сделано разработкой и ждёт проверки медиков; врач всегда может исправить профиль симптомов вручную.",
+    "status": "draft_by_dev_pending_review",
+    "phq9_item_present_min": {
+      "value": 2,
+      "note": "пункт PHQ-9 считается выраженным симптомом при ответе «более чем половину времени» и чаще (общепринятое правило подсчёта PHQ-9; ответ врача не получен)",
+      "status": "draft_by_dev_pending_review"
+    },
+    "phq9_items": {
+      "phq9_1": [
+        "утрата интереса или удовольствия"
+      ],
+      "phq9_2": [
+        "сниженное настроение",
+        "пессимистичное видение будущего"
+      ],
+      "phq9_3": [
+        "нарушение сна"
+      ],
+      "phq9_4": [
+        "снижение энергии / повышенная утомляемость"
+      ],
+      "phq9_5": [
+        "снижение аппетита"
+      ],
+      "phq9_6": [
+        "снижение самооценки",
+        "вина"
+      ],
+      "phq9_7": [
+        "нарушение концентрации"
+      ],
+      "phq9_9": [
+        "мысли о самоповреждении или самоубийстве"
+      ]
+    },
+    "intake_q1_options": {
+      "o1": [
+        "сниженное настроение"
+      ],
+      "o2": [
+        "утрата интереса или удовольствия"
+      ],
+      "o10": [
+        "снижение аппетита"
+      ],
+      "o11": [
+        "нарушение концентрации"
+      ],
+      "o12": [
+        "вина",
+        "пессимистичное видение будущего"
+      ]
+    },
+    "intake_q1_ambiguous_note": "вариант o9 (сон, энергия или утомляемость) нельзя однозначно отнести к одному симптому критерия, поэтому не используется как подтверждение; врач уточняет в профиле симптомов",
+    "duration_weeks_min_by_q2": {
+      "o1": 0,
+      "o2": 2,
+      "o3": 8,
+      "o4": 26,
+      "_note": "нижняя граница из формулировки ответа (например, «более полугода» ≈ 26 недель); o5–o7 длительность неизвестна",
+      "status": "draft_by_dev_pending_review"
+    },
+    "gad_symptom_pool": {
+      "status": "verify",
+      "note": "Критерий «не менее 4 симптомов, один вегетативный» в routing_rules.json не перечисляет остальные симптомы. Перечень ниже перенесён разработкой из критерия В для F41.1 по МКБ-10; сверить по тексту КР 457_3 перед внедрением.",
+      "autonomic": [
+        "сердцебиение",
+        "потливость",
+        "тремор (дрожь)",
+        "сухость во рту"
+      ],
+      "other": [
+        "затруднённое дыхание",
+        "ощущение удушья",
+        "боль или дискомфорт в груди",
+        "тошнота или дискомфорт в животе",
+        "головокружение",
+        "страх потери контроля",
+        "страх смерти",
+        "приливы жара или озноб",
+        "онемение или покалывание",
+        "мышечное напряжение или боли",
+        "неусидчивость, ощущение «на взводе»",
+        "ком в горле",
+        "повышенная реакция на неожиданное",
+        "трудности с концентрацией",
+        "постоянная раздражительность",
+        "трудности с засыпанием из-за беспокойства"
+      ]
+    }
+  },
+  "derived_facts": {
+    "_note": "Факты, которые можно вывести без вопроса врачу. Если вывести нельзя, остаётся «неизвестно».",
+    "pregnancy": {
+      "when": "profile.sex == m",
+      "value": "no",
+      "reason": "не применимо: мужской пол",
+      "status": "draft_by_dev_pending_review"
+    },
+    "lactation": {
+      "when": "profile.sex == m",
+      "value": "no",
+      "reason": "не применимо: мужской пол",
+      "status": "draft_by_dev_pending_review"
+    }
+  },
+  "rule_overrides": {
+    "_note": "Выражения для правил, у которых when в основном файле написано прозой или использует неоднозначные имена. Пороги (17, 3, 1 месяц) совпадают с текстом исходных правил.",
+    "R-RED-01": {
+      "expr": "safety_followup.intent == true OR safety_followup.plan == true OR safety_followup.preparatory_actions == true"
+    },
+    "M-04": {
+      "expr": "(hcl33_score >= 17 OR intake.q8 == yes) AND current_depressive"
+    },
+    "M-05": {
+      "expr": "intake.q4 == repeats AND intake.q4b == yes AND panic_duration_weeks >= 4"
+    },
+    "M-06": {
+      "expr": "intake.q5_avoidance == true AND intake.q6 >= 3"
+    },
+    "M-10": {
+      "expr": "profile.age < 18 OR pregnancy == yes OR lactation == yes"
+    },
+    "D-03": {
+      "expr": "(intake.q5_avoidance == true OR intake.q4 in [once, repeats]) AND intake.q6 <= 2"
+    }
+  },
+  "safety_followup_result": {
+    "_note": "Исполняемая запись result_rule из alert_rules.json → safety_followup. Порядок важен: побеждает самый высокий уровень. «Затрудняюсь» и прерванный блок = не разрешено, уровень не снижается.",
+    "source": "alert_rules.json#safety_followup.result_rule",
+    "items": [
+      {
+        "id": "SF-RED",
+        "level": "red",
+        "expr": "sf4 == yes OR sf5 == yes OR (sf6 == yes AND sf6_within_recent_days == true) OR sf8 == no",
+        "rule_ids": [
+          "R-RED-01",
+          "R-RED-02",
+          "R-RED-03"
+        ]
+      },
+      {
+        "id": "SF-ORANGE-UNRESOLVED",
+        "level": "orange",
+        "expr": "safety_followup.unresolved == true"
+      },
+      {
+        "id": "SF-ORANGE-ACTIVE",
+        "level": "orange",
+        "expr": "sf2 == yes"
+      },
+      {
+        "id": "SF-ORANGE-WISH",
+        "level": "orange",
+        "expr": "sf1 == yes"
+      }
+    ]
+  },
+  "drug_routing": {
+    "_note": "Какие маршрутные карточки порождает результат чекера препарата. Тексты — из drug_aviandr.json → gating и scenarios.json → expected.",
+    "contraindicated": {
+      "kind": "desirable",
+      "id": "D-DRUG-CI",
+      "title": "Противопоказание к препарату: пересмотреть варианты лечения",
+      "text": "Психиатр — по клинической необходимости, для выбора терапии",
+      "source": "drug_aviandr.json#gating.if_contraindicated; scenarios.json#S2"
+    },
+    "interaction_requires_decision": {
+      "kind": "desirable",
+      "id": "D-DRUG-IX",
+      "title": "Взаимодействие: нужно решение врача, назначившего принимаемый препарат",
+      "text": "Не добавлять препарат автоматически. Требуется решение лечащего психиатра",
+      "source": "drug_aviandr.json#interactions; scenarios.json#S3"
+    },
+    "out_of_indication_depression": {
+      "kind": "mandatory",
+      "rule_id": "M-02"
+    }
+  },
+  "text_lint": {
+    "_note": "Проверка формулировок (жёсткое ограничение 9). Шаблоны применяются к текстам, которые порождает система. Дополняют drug_aviandr.json → phrasing.forbidden и patient_texts.json → _meta.forbidden_words_patient.",
+    "doctor_forbidden_regex": [
+      "у пациента (депресси|тревожное расстройство|ГТР)",
+      "подтвержден[оа](?! врачом)",
+      "противопоказаний нет",
+      "(самый|лучший) (безопасн|препарат)",
+      "гарантированно"
+    ],
+    "patient_forbidden_regex": [
+      "(?<!не )(?<!не является )(?<!не ставит )(?<!не заменяет )диагноз",
+      "вы здоровы",
+      "вылечен",
+      "(тяжёл|умеренн|лёгк)[а-я]+ (депресси|тревог)",
+      "красн"
+    ]
+  },
+  "screening_thresholds": {
+    "_note": "Скрининговые пороги, уже записанные текстом в scales.json (screening_note). Вынесены сюда числом, чтобы движок мог их читать. Значения не новые.",
+    "phq9": {
+      "value": 10,
+      "source": "scales.json#phq9.screening_note; медики 3.4"
+    },
+    "gad7": {
+      "value": 10,
+      "source": "scales.json#gad7.screening_note"
+    },
+    "status": "draft_by_dev_pending_review"
+  },
+  "scale_triggers": {
+    "_note": "Триггеры шкал по ответам анкеты (из intake_questionnaire.json → scale_trigger_summary, записанные прозой). Выключенные шкалы (enabled=false) не предлагаются независимо от триггера.",
+    "status": "draft_by_dev_pending_review"
+  },
+  "routing_tier_overrides": {
+    "_note": "M-08: urgent при moderate_to_severe, soon при moderate (routing_rules.json → M-08.timing_tier_note).",
+    "M-08": [
+      {
+        "when": "ae.severity == moderate",
+        "value": "soon"
+      }
+    ]
+  },
+  "tier_hours": {
+    "_note": "Числовые часы для задач и сроков, выведены из текстов routing_rules.json → _meta.timing_tiers (24 часа / 7 дней / 30 дней).",
+    "urgent": {
+      "hours": 24
+    },
+    "soon": {
+      "hours": 168
+    },
+    "planned": {
+      "hours": 720
+    },
+    "status": "draft_by_dev_pending_review"
+  },
+  "amplifier_conditions": {
+    "_note": "Исполняемые условия усилителей (alert_rules.json → amplifiers). Усилители повышают приоритет внутри уровня и не меняют уровень.",
+    "алкоголь/ПАВ": "rus_audit_positive == true OR intake.q14_alcohol == true OR intake.q14_other == true",
+    "одиночество, нет поддержки": "intake.q21 == no",
+    "доступ к опасным средствам": "access_to_means == yes",
+    "суицидальные мысли": "intake.q12 in [recent, current, unresolved] OR phq9_item9 >= 1",
+    "предыдущие эпизоды": "prior_episodes == true",
+    "нарушение функционирования": "intake.q6 >= 3",
+    "бессонница": "sleep_disturbance_present == true"
+  },
+  "drug_indication_logic": {
+    "_note": "Как сопоставить диагноз врача с показаниями препарата. Коды F32/F33 — депрессивный эпизод и рекуррентное депрессивное расстройство (SRC-KR-DEP). Показание проверяется только по dx_icd10, который ввёл врач.",
+    "depression_icd_prefixes": [
+      "F32",
+      "F33"
+    ],
+    "depressive_syndrome_labels": [
+      "преобладает депрессивная симптоматика"
+    ],
+    "second_indication_field": "second_indication_confirmed",
+    "meds_confirmed_field": "meds_confirmed",
+    "status": "draft_by_dev_pending_review"
+  },
+  "alert_close_fields": {
+    "_note": "Обязательные поля закрытия алерта: подписи — ровно из alert_rules.json → alert_lifecycle.required_fields_on_close; здесь только имена полей API. auto=true — заполняется системой.",
+    "fields": [
+      {
+        "label": "кто и когда оценивал",
+        "key": "assessed_by",
+        "auto": true
+      },
+      {
+        "label": "способ контакта",
+        "key": "contact_method"
+      },
+      {
+        "label": "исходное основание сигнала",
+        "key": "signal_basis",
+        "auto": true
+      },
+      {
+        "label": "актуальные мысли, намерение, план, поведение, возможность оставаться в безопасности",
+        "key": "safety_assessment",
+        "subkeys": [
+          "thoughts",
+          "intent",
+          "plan",
+          "behavior",
+          "can_stay_safe"
+        ]
+      },
+      {
+        "label": "принятое решение",
+        "key": "decision"
+      },
+      {
+        "label": "кому передан пациент",
+        "key": "handed_to"
+      },
+      {
+        "label": "срок следующего контакта",
+        "key": "next_contact_due"
+      },
+      {
+        "label": "комментарий и причина закрытия",
+        "key": "comment"
+      }
+    ],
+    "relaxed_reasons": [
+      "technical_or_duplicate"
+    ],
+    "unreachable_markers": [
+      "не удалось связаться",
+      "недоступен",
+      "unreachable",
+      "no_answer",
+      "не дозвонились"
+    ],
+    "status": "draft_by_dev_pending_review"
+  },
+  "staff_message_templates": {
+    "_note": "Тексты уведомлений персоналу. Без клинических подробностей (SMS и push не должны раскрывать диагноз); отправка уведомления не равна оказанию помощи.",
+    "red": "КРАСНЫЙ сигнал безопасности: пациент {code}. Нужен немедленный контакт и оценка. Откройте карточку в «Клиническом компасе». Отправка уведомления не означает, что помощь оказана.",
+    "red_escalation": "ЭСКАЛАЦИЯ красного сигнала: пациент {code}, подтверждения нет. Нужен немедленный контакт и оценка. Отправка уведомления не означает, что помощь оказана.",
+    "orange": "Требуется оценка состояния пациента {code} в тот же рабочий день. Откройте карточку.",
+    "orange_info_after_hours": "Информационно: оранжевый сигнал у пациента {code} вне рабочего времени; поставлен в очередь на начало рабочего дня. Решение о срочности — за вами.",
+    "orange_escalation": "Оранжевый сигнал по пациенту {code} не принят вовремя. Требуется оценка.",
+    "status": "draft_by_dev_pending_review"
+  },
+  "monitoring_numbers": {
+    "_note": "Числа, записанные в monitoring.json текстом, в виде, удобном движку. Значения не новые.",
+    "response_depression_pct": {
+      "value": 50,
+      "source": "monitoring.json#dynamics_definitions.response_depression (КР 301_3: снижение не менее 50% от исходного, только для депрессии)"
+    },
+    "doctor_scale_remission": {
+      "ham_d_lt": 7,
+      "madrs_lt": 10,
+      "source": "scales.json#doctor_entered_scales.reference_remission"
+    },
+    "schedule_hint_days": {
+      "first_weeks": {
+        "until_weeks": 6,
+        "interval_days": 14
+      },
+      "source": "monitoring.json#schedule: «phq9 и gad7 каждые 2 недели» в первые 4–6 недель"
+    },
+    "status": "draft_by_dev_pending_review"
+  },
+  "reference_scale_hints": {
+    "hcl33": {
+      "question": "q8",
+      "options": [
+        "o2",
+        "o3"
+      ]
+    },
+    "lsas": {
+      "question": "q5",
+      "options": [
+        "o1",
+        "o2"
+      ]
+    },
+    "rus_audit": {
+      "question": "q14",
+      "options": [
+        "o1"
+      ]
+    },
+    "source": "прежние scale_triggers (до юридического аудита); теперь только подсказка пациенту «стоит обсудить с врачом», без текста опросника",
+    "status": "draft_by_dev_pending_review"
+  },
+  "duty_categories": {
+    "_note": "Категории «Центра оповещений» дежурного (по правилам сигналов)",
+    "urgent_requests": [
+      "PATIENT-NEED-SUPPORT"
+    ],
+    "deterioration": [
+      "R-RED-04",
+      "R-ORANGE-05",
+      "R-ORANGE-06",
+      "R-YELLOW-05"
+    ],
+    "adverse_events": [
+      "R-RED-05",
+      "R-ORANGE-02",
+      "R-YELLOW-04"
+    ],
+    "status": "draft_by_dev_pending_review"
+  }
+}

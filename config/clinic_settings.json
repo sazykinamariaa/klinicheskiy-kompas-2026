@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "description": "Организационные настройки клиники. Значения заглушки; менять без правки кода.",
+    "status": "approved_by_physician"
+  },
+  "timezone": "Europe/Moscow",
+  "working_hours": {
+    "mon_fri": [
+      "09:00",
+      "18:00"
+    ],
+    "sat_sun": null,
+    "status": "approved_by_physician"
+  },
+  "on_duty": {
+    "roster": [
+      {
+        "role": "duty_doctor",
+        "name": "[ЖДЁМ]",
+        "phone": "[ЖДЁМ]"
+      },
+      {
+        "role": "clinic_admin_on_duty",
+        "name": "[ЖДЁМ]",
+        "phone": "[ЖДЁМ]"
+      }
+    ],
+    "status": "waiting"
+  },
+  "notification_channels": {
+    "push": true,
+    "sms": true,
+    "phone_call": false,
+    "email": false,
+    "status": "approved_by_physician"
+  },
+  "escalation_defaults": {
+    "red_ack_minutes": 5,
+    "red_second_minutes": 10,
+    "orange_escalate_minutes": 120,
+    "status": "approved_by_physician"
+  },
+  "_approval": {
+    "status": "approved_by_physician",
+    "date": "2026-10-21",
+    "by": "[ФИО и подпись врача — внести]",
+    "basis": "сообщение команды: врач проверил и одобрил значения по умолчанию и черновики разработки; подписанный документ приложить к ТЗ",
+    "scope": "все значения, ранее помеченные default_pending_approval, draft_pending_approval, draft_by_dev_pending_approval, proposal(ed)_by_dev_pending_approval"
+  }
+}

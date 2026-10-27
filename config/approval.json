@@ -1,0 +1,9 @@
+{
+  "approval": {
+    "status": "approved_by_physician",
+    "date": "2026-10-21",
+    "by": "[ФИО и подпись врача — внести]",
+    "basis": "сообщение команды: врач проверил и одобрил значения по умолчанию и черновики разработки; подписанный документ приложить к ТЗ",
+    "scope": "все значения, ранее помеченные default_pending_approval, draft_pending_approval, draft_by_dev_pending_approval, proposal(ed)_by_dev_pending_approval"
+  }
+}
