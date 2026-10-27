@@ -1,0 +1,28 @@
+.patient { font-size: 18px; line-height: 1.6; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+.patient button, .patient a, .patient .opt, .patient .chip, .patient .tab { touch-action: manipulation; }
+.patient button:active:not(:disabled), .patient .opt:active, .patient .p-row:active, .patient .p-hero:active { transform: scale(.98); }
+.patient button { min-height: 56px; font-size: 1.05rem; }
+.patient .opt { min-height: 64px; font-size: 1.08rem; padding: 16px 18px; }
+.patient .chip { min-height: 52px; font-size: 1.02rem; padding: 0 18px; }
+.patient .hello h1 { font-size: 2.1rem; }
+.patient .hello p, .patient .p-note, .patient .p-trend p { font-size: 1.05rem; }
+.patient .flow-q h2 { font-size: 1.55rem; line-height: 1.35; }
+.patient .flow-q .stem, .patient .flow-hint { font-size: 1rem; }
+.patient .ft-title { font-size: 1rem; }
+.patient .p-row { min-height: 72px; }
+.patient .p-row .txt b { font-size: 1.06rem; }
+.patient .p-row .txt small { font-size: .95rem; }
+.patient .tab { font-size: .8rem; min-height: 60px; }
+.patient .bubble { font-size: 1.06rem; }
+.patient input, .patient textarea, .patient select { font-size: 1.05rem; }
+.patient .small, .patient .xs { font-size: .92rem; }
+.patient .p-disclaimer { font-size: .92rem; }
+.p-top-in { padding-top: max(10px, env(safe-area-inset-top)); }
+.flow-top-in { padding-top: max(10px, env(safe-area-inset-top)); }
+.patient .flow-actions { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+.patient .flow-actions-in button { min-height: 58px; }
+.patient .p-hero h2 { font-size: 1.55rem; }
+.patient .p-hero .hbtn { min-height: 52px; font-size: 1.05rem; padding: 0 22px; }
+.patient .sup button { min-height: 64px; font-size: 1.15rem; }
+@media (hover: none) { .patient .opt:hover { background: var(--surface); border-color: var(--line); } .patient .opt.on:hover { background: var(--brand-50); border-color: var(--brand); } }
+@media (max-width: 360px) { .patient { font-size: 17px; } .patient .wrap { padding-left: 16px; padding-right: 16px; } .patient .hello h1 { font-size: 1.85rem; } }

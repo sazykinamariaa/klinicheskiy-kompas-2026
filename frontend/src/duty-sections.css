@@ -1,0 +1,76 @@
+/* Дежурный: центр оповещений, контекст сигнала, маршрутизация, протоколы, передача смены */
+.dc-tabs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin: 0 0 16px }
+.dc-tab { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; min-height: 56px; padding: 10px 12px; text-align: left;
+  background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: var(--r-lg); box-shadow: none; font-weight: 600; font-size: .88rem; line-height: 1.25 }
+.dc-tab:hover { background: var(--surface-2) }
+.dc-tab svg { color: var(--brand) }
+.dc-tab.on { border-color: var(--brand); background: var(--brand-50) }
+.dc-cnt { min-width: 26px; height: 26px; border-radius: 13px; display: inline-grid; place-items: center; padding: 0 7px; background: var(--surface-3); font-weight: 700; font-size: .8rem }
+.dc-tab.on .dc-cnt { background: var(--brand); color: #fff }
+.dc-list { display: grid; gap: 10px }
+.dc-card { display: block; color: var(--ink); text-decoration: none; margin: 0 }
+.dc-card:hover { border-color: var(--line-2) }
+.dc-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
+.dc-basis { margin: 8px 0 4px; color: var(--ink-2) }
+.dc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; color: var(--mute) }
+.dc-meta > span { display: inline-flex; align-items: center; gap: 4px }
+.dc-sla { font-weight: 650; color: var(--orange-ink) }
+.dc-sla.over { color: var(--red-ink) }
+
+.ax h4 { margin: 0 0 8px; font-size: .92rem; display: flex; align-items: center; gap: 6px }
+.ax-tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; list-style: none; padding: 0; margin: 0 0 16px }
+.ax-step { display: grid; gap: 2px; padding: 8px 10px; border-radius: var(--r); background: var(--surface-2); color: var(--mute); font-size: .8rem; position: relative }
+.ax-step b { font-size: .82rem }
+.ax-step small { font-size: .72rem }
+.ax-step.done { background: var(--green-50); color: var(--green-ink) }
+.ax-dot { width: 20px; height: 20px; border-radius: 10px; display: grid; place-items: center; border: 1.5px solid var(--line-2); background: var(--surface) }
+.ax-step.done .ax-dot { border-color: var(--green); background: var(--green); color: #fff }
+.ax-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px }
+.ax-sec { background: var(--surface-2); border-radius: var(--r-lg); padding: 12px 14px }
+.ax-sec ul, .ax-sec ol { margin: 0; padding-left: 18px }
+.ax-sec p { margin: 4px 0 }
+.ax-proto { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px }
+.ax-proto ol { margin: 6px 0 10px; padding-left: 20px }
+.ax-proto li { margin: 3px 0 }
+.ax-em { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 }
+.ax-em button { min-height: 44px }
+.pr-card .row { gap: 10px }
+.pr-card .ax-grid { margin-top: 12px }
+.pr-card h4 { margin: 10px 0 4px }
+.pr-card h4:first-child { margin-top: 0 }
+
+.rt-level { margin: 0 0 22px }
+.rt-level > .row { gap: 10px; margin-bottom: 10px }
+.rt-card > .row { gap: 10px; flex-wrap: wrap }
+.rt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0 8px }
+.rt-sec { background: var(--surface-2); border-radius: var(--r-lg); padding: 12px 14px }
+.rt-sec h5 { margin: 0 0 6px; font-size: .85rem }
+.rt-sec .row { gap: 8px; flex-wrap: wrap; margin-top: 6px }
+.rt-sec select, .rt-sec input { flex: 1; min-width: 160px; min-height: 44px }
+.rt-sec button { min-height: 44px }
+.rt-sec ul { margin: 0; padding-left: 18px }
+.rt-over { color: var(--red-ink); font-weight: 650 }
+.rt-chain { margin-top: 6px }
+
+.ho-form h5 { margin: 0 0 6px; font-size: .88rem }
+.ho-sec { border-top: 1px solid var(--line); padding: 12px 0 }
+.ho-sec textarea { width: 100%; min-height: 64px; margin-top: 6px }
+.ho-sec select { width: 100%; min-height: 44px }
+.ho-list { margin: 0; padding-left: 18px }
+.ho-list li { margin: 3px 0 }
+.ho-form button { min-height: 44px; margin-top: 8px }
+.ho-item { border-top: 1px solid var(--line); padding: 12px 0 }
+.ho-item .row { gap: 10px; flex-wrap: wrap }
+
+@media (max-width: 640px) {
+  .ax-tl { grid-template-columns: 1fr 1fr }
+  .dc-tabs { grid-template-columns: 1fr }
+}
+.dc-tab, .bk-tile { white-space: normal; min-width: 0 }
+.dc-tab > span, .bk-tile > span { min-width: 0 }
+.ho-item .pill, .rt-card .pill, .dc-card .pill { white-space: normal; text-align: left; line-height: 1.3 }
+
+/* Новые пациенты (регистрация по ссылке) */
+.np-card { margin: 0 0 14px }
+.np-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line) }
+.np-row:first-of-type { border-top: 0 }

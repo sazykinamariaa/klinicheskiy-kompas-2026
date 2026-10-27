@@ -1,0 +1,63 @@
+/* Психиатр: «Мои пациенты», динамика, рекомендации, план, сообщения */
+.ps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 14px }
+.ps-tile { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; text-align: left; min-height: 64px; padding: 12px 14px; white-space: normal; min-width: 0;
+  background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: var(--r-lg); box-shadow: none; font-weight: 600 }
+.ps-tile:hover { background: var(--surface-2) }
+.ps-tile svg { color: var(--brand) }
+.ps-tile.on { border-color: var(--brand); background: var(--brand-50) }
+.ps-title { font-size: .88rem; line-height: 1.25; min-width: 0 }
+.ps-count { min-width: 28px; height: 28px; border-radius: 14px; display: inline-grid; place-items: center; padding: 0 8px; background: var(--surface-3); font-weight: 700; font-size: .85rem }
+.ps-tile.on .ps-count { background: var(--brand); color: #fff }
+.ps-list { margin-top: 14px; border-top: 1px solid var(--line) }
+.ps-row { border-bottom: 1px solid var(--line) }
+.ps-row.open { background: var(--surface-2); border-radius: var(--r) }
+.ps-head { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 4px; text-align: left; color: var(--ink); background: none; border: 0; box-shadow: none; font-weight: 500; white-space: normal }
+.ps-code { font-weight: 700; min-width: 44px }
+.ps-note { flex: 1; color: var(--ink-2); min-width: 0 }
+.ps-card { padding: 4px 8px 16px }
+.ps-sec { background: var(--surface-2); border-radius: var(--r-lg); padding: 12px 14px; min-width: 0 }
+.ps-sec h4 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: .92rem }
+.ps-sec h4 + h4, .ps-sec p + h4, .ps-sec ul + h4 { margin-top: 12px }
+.ps-sec ul { margin: 0; padding-left: 18px }
+.ps-qa { display: grid; gap: 2px; padding: 6px 0; border-top: 1px dashed var(--line) }
+.ps-qa:first-of-type { border-top: 0 }
+.ps-q { color: var(--mute); font-size: .8rem }
+.ps-a { font-size: .9rem }
+
+.wc { position: relative; display: inline-block }
+.wc-btn { min-width: 44px; min-height: 44px; border-radius: 22px; padding: 0 12px; font-weight: 700 }
+.wc-pop { position: absolute; z-index: 30; left: 0; top: calc(100% + 6px); max-height: 70vh; overflow: auto; width: min(360px, calc(100vw - 32px)); background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line-2); border-radius: var(--r-lg); box-shadow: 0 10px 30px rgba(0, 0, 0, .14); padding: 12px 14px; text-align: left; font-weight: 400 }
+.wc-pop h4 { margin: 0 0 6px; font-size: .9rem }
+.wc-pop ul { margin: 4px 0; padding-left: 18px }
+
+.pk { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px }
+.pk-chip { min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); box-shadow: none; font-weight: 600 }
+.pk-chip.on { border-color: var(--brand); background: var(--brand-50); color: var(--brand-700) }
+
+.dy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 14px 0 }
+.dy-table { width: 100%; border-collapse: collapse; font-size: .85rem }
+.dy-table th, .dy-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top }
+.dy-table th { color: var(--mute); font-weight: 650; font-size: .78rem; white-space: normal; text-transform: none; letter-spacing: 0 }
+.wc-pop.r { left: auto; right: 0 }
+
+.rc-item { border-top: 1px solid var(--line); padding: 14px 0 6px; margin-top: 12px }
+.rc-kind { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 650; color: var(--brand-700); background: var(--brand-50); border-radius: 999px; padding: 3px 10px }
+.rc-dec { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px }
+.rc-dec input { flex: 1 1 260px; min-height: 44px; min-width: 0 }
+.rc-dec button { min-height: 44px }
+.rc-done { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+.pl-list li { margin: 3px 0 }
+
+.ms-item { border-top: 1px solid var(--line); padding: 12px 0; margin-top: 8px }
+.ms-item.unread { border-left: 3px solid var(--brand); padding-left: 10px }
+.ms-item .row { gap: 8px; flex-wrap: wrap }
+.ms-item button { min-height: 44px }
+.ms-ctx { margin: 4px 0 0 }
+
+.ps-sec .pill, .rc-item .pill, .ms-item .pill, .ps-row .pill { white-space: normal; text-align: left; line-height: 1.3 }
+@media (max-width: 640px) {
+  .ps-grid { grid-template-columns: 1fr }
+  .wc-pop, .wc-pop.r { position: fixed; left: 16px; right: 16px; top: auto; bottom: 16px; width: auto; max-height: 70vh; overflow: auto }
+}
+.ps-head > button.link { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; min-height: 44px; text-align: left; color: var(--ink); text-decoration: none; white-space: normal }

@@ -1,0 +1,30 @@
+/* Алерты, направления психиатра — дополнение к style.css */
+.alert-head { padding: 22px 22px 18px }
+.alert-head.lvl-red { border-color: var(--red-100); box-shadow: inset 4px 0 0 var(--red), var(--sh-xs) }
+.alert-head.lvl-orange { border-color: var(--orange-100); box-shadow: inset 4px 0 0 var(--orange), var(--sh-xs) }
+.alert-head.lvl-yellow { border-color: var(--yellow-100); box-shadow: inset 4px 0 0 var(--yellow), var(--sh-xs) }
+.alert-head .ah-top { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap }
+.alert-head h1 { font-size: 1.35rem; line-height: 1.35; margin: 8px 0 4px }
+.ah-ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; flex: none; background: var(--surface-2); color: var(--ink-2) }
+.ah-ico.red { background: var(--red); color: #fff }
+.ah-ico.orange { background: var(--orange-50); color: var(--orange) }
+.ah-ico.yellow { background: var(--yellow-50); color: var(--yellow-ink) }
+.ah-cta { margin-left: auto }
+@media (max-width: 640px) { .ah-cta { width: 100%; margin-left: 0 } .ah-cta button { width: 100% } }
+.checklist { list-style: none; padding: 0; margin: 0 0 12px }
+.checklist li { position: relative; padding: 7px 0 7px 26px; margin: 0; border-top: 1px solid var(--line) }
+.checklist li:first-child { border-top: 0 }
+.checklist li::before { content: ""; position: absolute; left: 8px; top: 15px; width: 7px; height: 7px; border-radius: 50%; background: var(--brand) }
+.close-box > summary { font-size: 1rem }
+.close-box[open] > summary { margin-bottom: 4px }
+
+/* мастер-деталь для направлений */
+.md { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start }
+.md.has-sel { grid-template-columns: minmax(280px, 400px) minmax(0, 1fr) }
+@media (max-width: 900px) { .md.has-sel { grid-template-columns: minmax(0, 1fr) } }
+.al-item.clickable { cursor: pointer }
+.al-item.sel { background: var(--brand-50) }
+.sum-block { padding: 12px 0; border-top: 1px solid var(--line) }
+.sum-block:first-of-type { border-top: 0 }
+.sum-block h3 { margin-bottom: 6px }
+.sum-block p { margin: 2px 0 }

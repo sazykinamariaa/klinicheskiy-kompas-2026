@@ -1,0 +1,282 @@
+/* ==========================================================================
+   Пациент: спокойная тема. Красного цвета здесь нет ни в одном элементе.
+   ========================================================================== */
+.patient {
+  --bg: #F3F7F5;
+  --surface: #FFFFFF;
+  --surface-2: #EEF4F2;
+  --surface-3: #E2ECE9;
+  --ink: #17302C;
+  --ink-2: #3C534F;
+  --mute: #566B66;
+  --faint: #7F928D;
+  --line: #DCE7E4;
+  --line-2: #C6D7D2;
+  --brand: #2A7A73;
+  --brand-600: #22655F;
+  --brand-700: #184B47;
+  --brand-50: #E4F2EF;
+  --brand-100: #CAE4DF;
+  --focus: 0 0 0 3px rgba(74, 90, 154, .32);
+  --support: #4A5A9A;
+  --support-600: #3C4A84;
+  --support-50: #EEF0F8;
+  --support-100: #DADFF1;
+  --sand-50: #F7F1E8;
+  --sand-100: #EBDDC8;
+  --sand-ink: #634626;
+  /* защитно: даже если где-то встретится «красная» переменная — у пациента она песочная */
+  --red: #8A6A45; --red-50: #F7F1E8; --red-100: #EBDDC8; --red-ink: #634626;
+  --warn-50: #F7F1E8; --warn-100: #EBDDC8; --warn-ink: #634626;
+  --r-card: 22px;
+  --sh-card: 0 1px 2px rgba(23, 48, 44, .04), 0 8px 24px rgba(23, 48, 44, .06);
+
+  min-height: 100vh; color: var(--ink); font-size: 17px; line-height: 1.55;
+  background: radial-gradient(1100px 520px at 50% -180px, #D9EEE8 0%, rgba(217, 238, 232, 0) 72%), var(--bg);
+}
+.patient h1 { font-size: 1.75rem; line-height: 1.2; font-weight: 750; letter-spacing: -.02em; margin: 0 0 8px }
+.patient h2 { font-size: 1.3rem; line-height: 1.3; font-weight: 700; letter-spacing: -.015em; margin: 0 0 12px }
+.patient h3 { font-size: 1.06rem; font-weight: 700; margin: 0 0 8px }
+.patient a { color: var(--brand-700) }
+.patient .sub { color: var(--mute); font-size: 1rem }
+
+/* кнопки */
+.patient button { min-height: 52px; padding: 0 20px; border-radius: 16px; font-size: 1rem; font-weight: 650; background: var(--brand); box-shadow: 0 1px 2px rgba(24, 75, 71, .2), 0 4px 12px rgba(42, 122, 115, .18) }
+.patient button:hover { background: var(--brand-600) }
+.patient button.sec { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line-2); box-shadow: none }
+.patient button.sec:hover { background: var(--surface-2) }
+.patient button.ghost { background: transparent; color: var(--ink-2); box-shadow: none; border: 0 }
+.patient button.ghost:hover { background: var(--surface-3) }
+.patient button.icon { width: 48px; min-height: 48px; padding: 0; border-radius: 14px }
+.patient button.link { background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--support) !important; text-decoration: underline; text-underline-offset: 3px; padding: 8px 4px !important; min-height: 44px; width: auto; font-size: 1rem }
+.patient button.block { width: 100% }
+.patient button:disabled { opacity: .4 }
+.patient input, .patient select, .patient textarea { min-height: 52px; font-size: 1rem; border-radius: 14px; border-width: 1.5px; padding: 12px 14px; background: var(--surface) }
+.patient textarea { min-height: 110px }
+.patient label { font-size: .95rem; color: var(--ink-2) }
+.patient .err { background: var(--sand-50); color: var(--sand-ink); border: 1px solid var(--sand-100); border-radius: 14px; padding: 12px 14px; font-size: .95rem }
+.patient :focus-visible { outline: 3px solid var(--support); outline-offset: 2px; box-shadow: none }
+.patient .card { border-radius: var(--r-card); padding: 20px; margin: 0 0 14px; border: 1px solid rgba(220, 231, 228, .8); box-shadow: var(--sh-card) }
+.patient .banner.b-info { background: var(--brand-50); border: 0; box-shadow: none; border-radius: 18px; padding: 14px 16px; color: var(--ink-2) }
+
+/* контейнер */
+.patient .wrap { max-width: 560px; margin: 0 auto; padding: 8px 20px calc(110px + env(safe-area-inset-bottom)) }
+.patient.flow .wrap { padding-bottom: calc(120px + env(safe-area-inset-bottom)) }
+
+/* шапка */
+.p-top { position: sticky; top: 0; z-index: 30; background: rgba(243, 247, 245, .82); backdrop-filter: saturate(1.5) blur(14px); -webkit-backdrop-filter: saturate(1.5) blur(14px) }
+.p-top-in { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 20px; min-height: 64px }
+.p-brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 700; font-size: .95rem; flex: 1; min-width: 0 }
+.p-me { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); color: var(--brand-700); font-weight: 750; font-size: .85rem }
+.p-me:hover { border-color: var(--line-2) }
+
+/* приветствие */
+.hello { padding: 8px 2px 18px }
+.hello .eyebrow { font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--mute) }
+.hello h1 { font-size: 2rem; margin: 4px 0 6px }
+.hello p { color: var(--mute); margin: 0 }
+
+/* главная карточка «следующий шаг» */
+.p-hero { position: relative; overflow: hidden; display: block; text-decoration: none; color: #fff; border-radius: 26px; padding: 22px 22px 20px; margin: 0 0 16px;
+  background: radial-gradient(420px 220px at 100% 0%, rgba(255, 255, 255, .18), transparent 60%), linear-gradient(140deg, #2E837B 0%, #1E5F5A 100%);
+  box-shadow: 0 14px 32px rgba(30, 95, 90, .28) }
+.p-hero::after { content: ""; position: absolute; right: -60px; top: -60px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .16); box-shadow: 0 0 0 28px rgba(255, 255, 255, .05) }
+.p-hero .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .82 }
+.p-hero h2 { color: #fff; font-size: 1.45rem; margin: 6px 0 4px; max-width: 85% }
+.p-hero p { color: rgba(255, 255, 255, .85); margin: 0 0 14px; font-size: .95rem }
+.p-hero .hbar { height: 8px; border-radius: 8px; background: rgba(255, 255, 255, .22); overflow: hidden; margin: 4px 0 16px }
+.p-hero .hbar > i { display: block; height: 100%; border-radius: 8px; background: #fff }
+.p-hero .hbtn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 14px; background: #fff; color: var(--brand-700); font-weight: 700 }
+.p-hero.done { background: linear-gradient(140deg, #E4F2EF 0%, #D5EAE5 100%); color: var(--ink); box-shadow: none }
+.p-hero.done h2 { color: var(--ink) }
+.p-hero.done p { color: var(--ink-2) }
+.p-hero.done::after { border-color: rgba(42, 122, 115, .15); box-shadow: 0 0 0 28px rgba(42, 122, 115, .04) }
+
+/* списки-строки */
+.p-section { font-size: .8125rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; color: var(--mute); margin: 22px 4px 10px }
+.p-list { background: var(--surface); border-radius: var(--r-card); box-shadow: var(--sh-card); border: 1px solid rgba(220, 231, 228, .8); overflow: hidden; margin-bottom: 14px }
+.p-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; min-height: 68px; color: var(--ink); text-decoration: none; border-top: 1px solid var(--line) }
+.p-row:first-child { border-top: 0 }
+.p-row:hover { background: #F8FBFA }
+.p-row .bub { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; flex: none; background: var(--brand-50); color: var(--brand) }
+.p-row .bub.sup { background: var(--support-50); color: var(--support) }
+.p-row .bub.sand { background: var(--sand-50); color: var(--sand-ink) }
+.p-row .txt { flex: 1; min-width: 0; line-height: 1.35 }
+.p-row .txt b { display: block; font-weight: 650 }
+.p-row .txt small { color: var(--mute); font-size: .875rem }
+.p-row .chev { color: var(--faint) }
+.p-row .cnt { min-width: 24px; height: 24px; border-radius: 12px; display: grid; place-items: center; background: var(--support); color: #fff; font-size: .78rem; font-weight: 700; padding: 0 7px }
+
+/* напоминание, цель, динамика */
+.p-note { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border-radius: 18px; padding: 14px 16px; margin: 0 0 14px; color: var(--ink-2); font-size: .95rem; border: 1px solid var(--line) }
+.p-note .ico { color: var(--brand); margin-top: 2px }
+.p-trend { display: flex; gap: 14px; align-items: flex-start }
+.p-trend .bub { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--brand-50); color: var(--brand); flex: none }
+.p-trend p { margin: 0; color: var(--ink-2) }
+.p-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-weight: 650; text-decoration: none; min-height: 44px }
+
+/* поддержка */
+.patient .sup { background: var(--support-50); border: 1.5px solid var(--support-100); border-radius: 24px; padding: 22px; margin: 0 0 16px }
+.patient .sup h2 { color: #23306A; font-size: 1.35rem; line-height: 1.3 }
+.patient .sup p { color: #2E3A6B }
+.patient .sup .row { display: grid; gap: 10px; margin-top: 14px }
+.patient .sup .row a { display: block; text-decoration: none }
+.patient .sup button { width: 100%; min-height: 60px; font-size: 1.1rem; background: var(--support); border: 0; box-shadow: 0 6px 16px rgba(74, 90, 154, .25) }
+.patient .sup button:hover { background: var(--support-600) }
+.patient .sup button.sec { background: #fff; color: var(--support); border: 1.5px solid var(--support-100); box-shadow: none }
+.patient .sup button.sec:hover { background: #F7F8FD }
+.patient .sup button:disabled { opacity: .55 }
+.patient .sup .sup-wait { display: block; font-size: .8125rem; color: #4E5880; margin-top: 4px; text-align: center }
+.patient .sup .sup-compact-head { display: flex; gap: 12px; align-items: center; margin-bottom: 6px }
+.patient .sup .sup-compact-head .bub { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #fff; color: var(--support) }
+.patient .crisis { padding-top: 10px }
+.patient .crisis .sup { padding: 26px 22px; text-align: left }
+.patient .crisis .sup h2 { font-size: 1.55rem }
+.patient .crisis .sup .lines p { font-size: 1.05rem; margin: 0 0 10px; padding-left: 30px; position: relative }
+.patient .crisis .sup .lines p::before { content: ""; position: absolute; left: 6px; top: .6em; width: 9px; height: 9px; border-radius: 50%; background: var(--support) }
+.p-help { background: var(--surface); border-radius: var(--r-card); padding: 18px; box-shadow: var(--sh-card); border: 1px solid rgba(220, 231, 228, .8); margin: 0 0 14px }
+.p-help .h-top { display: flex; gap: 12px; align-items: center; margin-bottom: 12px }
+.p-help .h-top .bub { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: var(--support-50); color: var(--support); flex: none }
+.p-help button { width: 100%; background: var(--support); box-shadow: 0 6px 16px rgba(74, 90, 154, .22) }
+.p-help button:hover { background: var(--support-600) }
+.p-help .small { margin: 10px 0 0 }
+.p-disclaimer { text-align: center; color: var(--mute); font-size: .875rem; margin: 18px 0 0 }
+
+/* опросники: пошаговый поток */
+.flow-top { position: sticky; top: 0; z-index: 30; background: rgba(243, 247, 245, .9); backdrop-filter: saturate(1.5) blur(14px); -webkit-backdrop-filter: saturate(1.5) blur(14px) }
+.flow-top-in { max-width: 560px; margin: 0 auto; padding: 10px 16px 12px; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; gap: 8px }
+.flow-top .ft-title { text-align: center; font-size: .9rem; font-weight: 650; color: var(--ink-2); line-height: 1.25 }
+.flow-top .ft-title small { display: block; font-weight: 550; color: var(--mute); font-size: .8125rem }
+.flow-top a.icon-link { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; color: var(--ink-2); text-decoration: none }
+.flow-top a.icon-link:hover { background: var(--surface-3) }
+.flow-top .prog { grid-column: 1 / -1; height: 6px; background: var(--surface-3); margin-top: 4px }
+.flow-top .prog > div { background: var(--brand) }
+.flow-q { padding: 18px 2px 8px }
+.flow-q .stem { color: var(--mute); font-size: .95rem; margin-bottom: 10px }
+.flow-q h2 { font-size: 1.45rem; line-height: 1.32; margin: 0 }
+.flow-hint { color: var(--mute); font-size: .9rem; margin: 8px 0 0 }
+.flow-actions { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: linear-gradient(to top, var(--bg) 70%, rgba(243, 247, 245, 0)); padding: 18px 0 calc(14px + env(safe-area-inset-bottom)) }
+.flow-actions-in { max-width: 560px; margin: 0 auto; padding: 0 20px; display: flex; gap: 10px; align-items: center }
+.flow-actions-in > button:last-of-type, .flow-actions-in > .primary { flex: 1 }
+.flow-actions-in .later { display: block; text-align: center }
+.flow-later { max-width: 560px; margin: 0 auto; text-align: center; padding: 0 20px }
+.flow-done { text-align: center; padding: 30px 6px 10px }
+.flow-done .big-ico { width: 72px; height: 72px; border-radius: 24px; margin: 0 auto 16px; display: grid; place-items: center; background: var(--brand-50); color: var(--brand) }
+.flow-done ul { text-align: left }
+.result-card { text-align: left }
+
+/* варианты ответа */
+.patient .opt { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; min-height: 60px; margin: 10px 0; padding: 14px 18px 14px 16px; background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: 18px; font-weight: 550; font-size: 1.02rem; line-height: 1.4; box-shadow: 0 1px 2px rgba(23, 48, 44, .04) }
+.patient .opt::before { content: ""; width: 24px; height: 24px; flex: none; border-radius: 50%; border: 2px solid var(--line-2); background: #fff; transition: all .15s }
+.patient .opt.multi::before { border-radius: 7px }
+.patient .opt:hover { background: #FAFCFB; border-color: var(--line-2) }
+.patient .opt.on { border-color: var(--brand); background: var(--brand-50); font-weight: 650; box-shadow: 0 0 0 1px var(--brand) inset }
+.patient .opt.on::before { border-color: var(--brand); background: var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 16px no-repeat }
+
+/* чек-ин */
+.ci-q { padding: 18px }
+.ci-q h3 { font-size: 1.05rem; line-height: 1.4; margin-bottom: 14px }
+.ci-val { display: flex; align-items: baseline; justify-content: center; gap: 6px; margin: 2px 0 6px }
+.ci-val b { font-size: 2.2rem; font-weight: 750; letter-spacing: -.02em; color: var(--brand-700); font-variant-numeric: tabular-nums; line-height: 1 }
+.ci-val span { color: var(--mute); font-size: .9rem }
+.ci-val.none b { font-size: 1.1rem; color: var(--mute); font-weight: 600 }
+.ci-ends { display: flex; justify-content: space-between; gap: 12px; font-size: .84rem; color: var(--mute); line-height: 1.3 }
+.ci-ends span:last-child { text-align: right }
+.patient input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; min-height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; --v: 0% }
+.patient input[type=range]:focus { box-shadow: none }
+.patient input[type=range]::-webkit-slider-runnable-track { height: 10px; border-radius: 10px; background: linear-gradient(to right, var(--brand) var(--v), var(--surface-3) var(--v)) }
+.patient input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; margin-top: -10px; border-radius: 50%; background: #fff; border: 2.5px solid var(--brand); box-shadow: 0 2px 8px rgba(23, 48, 44, .2) }
+.patient input[type=range]::-moz-range-track { height: 10px; border-radius: 10px; background: var(--surface-3) }
+.patient input[type=range]::-moz-range-progress { height: 10px; border-radius: 10px; background: var(--brand) }
+.patient input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 2.5px solid var(--brand); box-shadow: 0 2px 8px rgba(23, 48, 44, .2) }
+.patient input[type=range].unset::-webkit-slider-thumb { border-color: var(--line-2) }
+.chips { display: flex; flex-wrap: wrap; gap: 8px }
+.patient .chip { min-height: 48px; padding: 0 16px; border-radius: 999px; background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); box-shadow: none; font-weight: 600 }
+.patient .chip:hover { background: var(--surface-2) }
+.patient .chip.on { background: var(--brand); color: #fff; border-color: var(--brand) }
+
+/* план */
+.plan-sec { padding: 16px 18px 18px }
+.plan-sec label { display: flex; gap: 12px; align-items: center; margin: 0 0 10px; font-size: 1rem; color: var(--ink); font-weight: 650; line-height: 1.35 }
+.plan-sec label .bub { width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center; flex: none; background: var(--brand-50); color: var(--brand) }
+.plan-sec.em label .bub { background: var(--support-50); color: var(--support) }
+.plan-sec textarea { min-height: 88px; background: var(--surface-2); border-color: transparent }
+.plan-sec textarea:focus { background: #fff; border-color: var(--brand) }
+.plan-state { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 12px; border-radius: 999px; font-size: .875rem; font-weight: 650 }
+.plan-state.ok { background: var(--brand-50); color: var(--brand-700) }
+.plan-state.wait { background: var(--sand-50); color: var(--sand-ink) }
+
+/* сообщения */
+.patient .chat { gap: 10px; padding: 6px 0 14px }
+.patient .bubble { font-size: 1rem; border-radius: 20px; padding: 12px 16px; max-width: 86% }
+.patient .bubble.in { background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 8px }
+.patient .bubble.out { background: var(--brand); border-bottom-right-radius: 8px }
+.patient .composer { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 8px; box-shadow: var(--sh-card); display: block }
+.patient .composer textarea { border: 0; background: transparent; min-height: 64px; height: auto; resize: vertical; padding: 8px 10px }
+.patient .composer textarea:focus { box-shadow: none }
+.patient .composer .row { justify-content: space-between; padding: 2px 2px 0 }
+.patient .composer .row button { min-height: 48px }
+.chat-empty { text-align: center; padding: 26px 10px 18px; color: var(--mute) }
+.chat-empty .bub { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; margin: 0 auto 10px; background: var(--brand-50); color: var(--brand) }
+.chat-day { align-self: center; font-size: .78rem; color: var(--mute); background: var(--surface-3); padding: 3px 10px; border-radius: 999px }
+
+/* профиль */
+.p-profile-head { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 0 20px }
+.p-profile-head .avatar { width: 80px; height: 80px; font-size: 1.6rem; background: linear-gradient(140deg, #2E837B, #1E5F5A); color: #fff; margin-bottom: 12px; box-shadow: 0 10px 24px rgba(30, 95, 90, .25) }
+
+/* нижняя навигация */
+.patient .tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  background: rgba(255, 255, 255, .92); backdrop-filter: saturate(1.6) blur(18px); -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  border-top: 1px solid var(--line); padding: 6px 8px calc(6px + env(safe-area-inset-bottom)) }
+.patient .tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 56px; border-radius: 16px; text-decoration: none; color: var(--mute); font-size: .75rem; font-weight: 650; letter-spacing: .01em }
+.patient .tab .t-ico { width: 56px; height: 30px; border-radius: 15px; display: grid; place-items: center; transition: background .2s var(--ease), color .2s }
+.patient .tab.active { color: var(--brand-700) }
+.patient .tab.active .t-ico { background: var(--brand-50); color: var(--brand) }
+.patient .tab .t-cnt { position: absolute; top: 2px; left: calc(50% + 10px); min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; display: grid; place-items: center; background: var(--support); color: #fff; font-size: .68rem; font-weight: 750 }
+@media (min-width: 700px) {
+  .patient .tabbar { left: 50%; right: auto; transform: translateX(-50%); bottom: 18px; width: 520px; border-radius: 24px; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(23, 48, 44, .12); padding: 6px }
+  .patient .wrap { padding-bottom: 130px }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .patient * { transition: none !important; animation: none !important }
+}
+.flow-actions-in.two > button { flex: 1 }
+.patient .p-row b.num, .patient .p-row > b { font-variant-numeric: tabular-nums }
+.patient .sup .lines p { position: relative; padding-left: 28px; margin: 0 0 10px }
+.patient .sup .lines p::before { content: ""; position: absolute; left: 6px; top: .62em; width: 9px; height: 9px; border-radius: 50%; background: var(--support) }
+.patient .hello p + p { margin-top: 0 }
+.patient a.p-hero { color: #fff }
+.patient a.p-hero:hover { text-decoration: none; filter: brightness(1.03) }
+.patient .p-hero.done { color: var(--ink) }
+.patient .opt { justify-content: flex-start }
+.patient .toast-wrap { bottom: calc(96px + env(safe-area-inset-bottom)) }
+.patient .toast { background: #23306A; font-size: .95rem }
+.patient .toast .ico { color: #C9D1F5 }
+.p-brand { min-height: 44px }
+.patient .crisis1 { display: flex; flex-direction: column; gap: 14px; padding: 18px 2px 8px; }
+.patient .crisis1 h1 { font-size: 1.9rem; line-height: 1.22; color: #23306A; margin: 0; }
+.patient .c1-lines { font-size: 1.15rem; line-height: 1.5; color: #2E3A6B; margin: 0; }
+.patient .c1-main { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 96px; border-radius: 26px; background: var(--support); color: #fff; font-size: 1.6rem; font-weight: 800; text-decoration: none; box-shadow: 0 14px 32px rgba(74, 90, 154, .35); }
+.patient .c1-main:active { transform: scale(.98); }
+.patient .c1-second { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; border-radius: 20px; background: #fff; color: var(--support); border: 2px solid var(--support-100); font-size: 1.2rem; font-weight: 700; text-decoration: none; }
+.patient .c1-more { background: transparent; color: var(--support); box-shadow: none; border: 0; min-height: 52px; font-size: 1.02rem; text-decoration: underline; text-underline-offset: 3px; }
+.patient .c1-more:hover { background: var(--support-50); }
+.patient .c1-extra { background: var(--support-50); border: 1.5px solid var(--support-100); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.patient .c1-extra p { margin: 0; color: #2E3A6B; }
+.patient .c1-row { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 16px; border-radius: 16px; background: #fff; color: var(--support); font-weight: 700; text-decoration: none; border: 1.5px solid var(--support-100); }
+.patient .c1-row.off { color: var(--mute); }
+.patient .c1-row small { margin-left: auto; font-weight: 500; font-size: .82rem; }
+.patient .c1-note { font-size: .92rem; }
+.patient .c1-details ul { margin: 6px 0; padding-left: 20px; }
+.patient .c1-disc { text-align: center; color: var(--mute); font-size: .9rem; margin: 6px 0 0; }
+.patient:has(.crisis1) .tabbar, .patient:has(.crisis1) .dev-sw { display: none; }
+.patient:has(.crisis1) .wrap { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+/* Регистрация по ссылке-приглашению (демо) */
+.inv-form label { display: block; margin-top: 12px }
+.inv-form input[type=date], .inv-form input[type=password] { width: 100% }
+.inv-form .err { margin: 6px 0 0 }
+.inv-form .block { margin-top: 16px }
+.inv-steps { margin: 6px 0 10px; padding-left: 20px }
+.inv-steps li { margin: 8px 0 }
+.inv-demo { margin-top: 14px }

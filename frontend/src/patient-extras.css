@@ -1,0 +1,80 @@
+/* Пациент: опросники, цель, «маленькие шаги», приём лекарства, просмотр анкеты. Без красного. */
+.patient .m-head, .patient .goal-head, .patient .med-head { display: flex; align-items: center; gap: 12px }
+.patient .m-head .bub, .patient .goal-head .bub, .patient .med-head .bub { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; flex: none; background: var(--brand-50); color: var(--brand) }
+.patient .m-title { flex: 1; display: flex; flex-direction: column; min-width: 0 }
+.patient .m-title small { color: var(--mute); font-size: .875rem }
+.patient .m-due { flex: none; background: var(--brand-50); color: var(--brand-600); border-radius: 999px; padding: 4px 10px; font-size: .8rem; font-weight: 650 }
+.patient .m-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 4px }
+.patient .m-cmp > div { background: var(--surface-2); border-radius: var(--r); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px }
+.patient .m-cmp span { font-size: .78rem; color: var(--mute) }
+.patient .m-cmp b { font-size: .95rem }
+.patient .cmp-better { color: var(--green-ink) }
+.patient .cmp-same { color: var(--ink-2) }
+.patient .cmp-worse { color: var(--warn-ink) }
+.patient .cmp-none { color: var(--mute); font-weight: 500 }
+.patient .m-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap }
+.patient .m-foot button { min-height: 44px }
+.patient .m-ref { align-items: flex-start }
+.patient .m-ref .txt { display: flex; flex-direction: column; gap: 3px }
+.patient .m-by { color: var(--brand-600); font-size: .8rem; font-weight: 600 }
+.patient .m-suggest { display: inline-flex; align-items: center; gap: 6px; width: fit-content; margin-top: 4px; background: var(--warn-50); color: var(--warn-ink); border-radius: 999px; padding: 3px 10px; font-size: .8rem; font-weight: 600 }
+
+.patient .goal-head h3 { margin: 0; flex: 1 }
+.patient .goal-head .link { min-height: 44px; display: inline-flex; align-items: center; gap: 6px }
+.patient .goal-text { font-size: 1.15rem; font-weight: 650; color: var(--ink); margin: 12px 0 4px }
+.patient .goal-card textarea { width: 100%; min-height: 96px; margin: 12px 0 }
+.patient .goal-card .row { justify-content: flex-end }
+.patient .goal-card button { min-height: 44px }
+
+.patient .steps h3 { margin: 0 0 4px }
+.patient .steps-phrase { display: flex; gap: 8px; align-items: flex-start; background: var(--brand-50); color: var(--brand-600); border-radius: var(--r); padding: 10px 12px; margin: 10px 0 }
+.patient .steps-today { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 14px }
+.patient .st-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--line); color: var(--mute); font-size: .85rem }
+.patient .st-chip.on { border-color: var(--green); background: var(--green-50); color: var(--green-ink) }
+.patient .steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 10px; margin-bottom: 10px }
+.patient .step { border: 1.5px dashed var(--line); border-radius: var(--r-lg); padding: 12px; display: flex; flex-direction: column; gap: 4px; min-height: 120px }
+.patient .step small { color: var(--mute); font-size: .8rem }
+.patient .step.earned { border-style: solid; border-color: var(--brand-100); background: var(--brand-50) }
+.patient .step-ico { color: var(--mute) }
+.patient .step.earned .step-ico { color: var(--brand) }
+.patient .step-prog { display: block; margin-top: auto; position: relative; padding-top: 0 }
+.patient .step-prog::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; border-radius: 999px; background: var(--surface-2) }
+.patient .step-prog i { position: relative; z-index: 1; display: block; height: 6px; border-radius: 999px; background: var(--brand) }
+.patient .step-prog em { font-style: normal; font-size: .75rem; color: var(--mute); display: block; margin-top: 4px }
+.patient .steps > .link, .patient .steps-off button { min-height: 44px; display: inline-flex; align-items: center; gap: 6px }
+
+.patient .med-head h3 { margin: 0 }
+.patient .med-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 8px }
+.patient .med-slot { border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center }
+.patient .med-slot button { min-height: 44px; width: 100% }
+.patient .med-slot.taken { border-color: var(--green); background: var(--green-50) }
+.patient .pill-ico { display: inline-block; width: 46px; height: 20px; border-radius: 999px; overflow: hidden; border: 1.5px solid var(--brand-600); background: var(--surface); position: relative; transform: rotate(-25deg); margin: 6px 0 }
+.patient .pill-ico i { position: absolute; left: 0; top: 0; bottom: 0; width: 50%; background: var(--brand-100) }
+.patient .med-slot.taken .pill-ico { border-color: var(--green) }
+.patient .med-slot.taken .pill-ico i { background: var(--green) }
+.patient .med-ok { display: inline-flex; align-items: center; gap: 6px; color: var(--green-ink); font-weight: 650; min-height: 44px }
+.patient .med-done { display: flex; align-items: center; gap: 6px; color: var(--green-ink); margin: 0 0 6px }
+.patient .med-details h3 { display: flex; align-items: center; gap: 8px; margin: 0 }
+.patient .med-details .kv { display: grid; grid-template-columns: minmax(110px, auto) 1fr; gap: 6px 12px; margin: 10px 0 }
+.patient .med-details dt { color: var(--mute); font-size: .875rem }
+.patient .med-details dd { margin: 0 }
+
+.patient .iv-item { border-top: 1px solid var(--line); padding: 12px 0 }
+.patient .iv-item:first-child { border-top: 0; padding-top: 0 }
+.patient .iv-q { font-weight: 600; margin-bottom: 4px }
+.patient .iv-a { color: var(--ink-2) }
+.patient .iv-item .link { min-height: 44px; display: inline-flex; align-items: center; gap: 6px }
+
+@media (max-width: 380px) {
+  .patient .m-cmp, .patient .med-slots { grid-template-columns: 1fr }
+}
+/* Уточнения первичной анкеты (необязательные) */
+.patient .fu-box { margin: 18px 0 6px; padding: 14px 16px; background: var(--surface-2); border-radius: 18px }
+.patient .fu-title { margin: 0 0 6px; color: var(--mute); font-size: .9rem }
+.patient .fu-item { padding: 10px 0; border-top: 1px solid var(--line) }
+.patient .fu-item:first-of-type { border-top: 0 }
+.patient .fu-q { margin: 0 0 6px; font-weight: 600 }
+.patient .fu-box .opt { min-height: 48px; margin: 8px 0; font-size: .96rem }
+.patient .fu-text, .patient .fu-label textarea { width: 100%; min-height: 44px; margin-top: 6px }
+.patient .fu-label { display: block; margin: 10px 0 0; font-size: .9rem; color: var(--ink-2) }
+.patient .iv-sub { margin-top: 4px; font-size: .88rem; color: var(--mute) }

@@ -1,0 +1,67 @@
+/* Разделы врача: «Мои пациенты», краткая карточка, подсказки, направления, лекарственная безопасность */
+.bk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 14px }
+.bk-tile { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; text-align: left; min-height: 64px; padding: 12px 14px;
+  background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: var(--r-lg); box-shadow: none; font-weight: 600 }
+.bk-tile:hover { background: var(--surface-2) }
+.bk-tile svg { color: var(--brand) }
+.bk-tile.on { border-color: var(--brand); background: var(--brand-50) }
+.bk-title { font-size: .9rem; line-height: 1.25 }
+.bk-count { min-width: 28px; height: 28px; border-radius: 14px; display: inline-grid; place-items: center; padding: 0 8px; background: var(--surface-3); font-weight: 700; font-size: .85rem }
+.bk-tile.on .bk-count { background: var(--brand); color: #fff }
+.bk-list { margin-top: 14px; border-top: 1px solid var(--line) }
+.bk-row { border-bottom: 1px solid var(--line) }
+.bk-head { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 4px; text-align: left; color: var(--ink); text-decoration: none }
+.bk-code { font-weight: 700; min-width: 44px }
+.bk-note { flex: 1; color: var(--ink-2) }
+.bk-row.open { background: var(--surface-2); border-radius: var(--r) }
+
+.bf { padding: 4px 8px 16px }
+.bf > .row { gap: 10px; flex-wrap: wrap; margin-bottom: 12px }
+.bf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px }
+.bf-sec { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 14px 16px }
+.bf-sec h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: .95rem }
+.bf-sec h4 svg { color: var(--brand) }
+.bf-qa { display: grid; gap: 2px; padding: 6px 0; border-top: 1px dashed var(--line) }
+.bf-qa:first-of-type { border-top: 0 }
+.bf-q { color: var(--mute); font-size: .8rem }
+.bf-a { font-size: .9rem }
+.bf-scale { display: grid; gap: 2px; padding: 6px 0 }
+.bf-risk { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; padding: 6px 0; font-size: .9rem }
+
+.hn-card h3 { font-size: 1.15rem }
+.hn-item { border-top: 1px solid var(--line); padding: 14px 0 4px; margin-top: 12px }
+.hn-kind { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 650; color: var(--brand-700); background: var(--brand-50); border-radius: 999px; padding: 3px 10px }
+.hn-found { margin: 10px 0 8px }
+.hn-block { margin: 6px 0 }
+.hn-block h5 { margin: 0 0 4px; font-size: .82rem; color: var(--mute); text-transform: none; font-weight: 650 }
+.hn-block ul { margin: 0; padding-left: 18px }
+.hn-block li { margin: 2px 0 }
+.hn-next { display: flex; gap: 6px; align-items: flex-start; background: var(--surface-2); border-radius: var(--r); padding: 10px 12px; margin: 10px 0 6px }
+.hn-next svg { flex: none; margin-top: 3px; color: var(--brand) }
+.hn-src { display: flex; align-items: center; gap: 6px; flex-wrap: wrap }
+
+.rf-form label { display: block; margin-top: 10px }
+.rf-form select, .rf-form textarea { width: 100% }
+.rf-form textarea { min-height: 72px }
+.rf-form button { margin-top: 12px; min-height: 44px }
+.rf-item { border-top: 1px solid var(--line); padding: 14px 0 }
+.rf-item .row { gap: 10px; flex-wrap: wrap }
+.rf-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; list-style: none; padding: 0; margin: 12px 0 }
+.rf-step { position: relative; padding: 8px 10px; border-radius: var(--r); background: var(--surface-2); color: var(--mute); font-size: .82rem; display: grid; gap: 2px }
+.rf-step span { font-weight: 650 }
+.rf-step.done { background: var(--green-50); color: var(--green-ink) }
+.rf-step small { color: var(--mute); font-size: .72rem }
+
+.ds-card h3 { font-size: 1.15rem }
+.ds-card > .row { gap: 10px; flex-wrap: wrap }
+.ds-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px }
+.ds-sec { background: var(--surface-2); border-radius: var(--r-lg); padding: 12px 14px }
+.ds-sec h4 { margin: 0 0 8px; font-size: .9rem }
+.ds-list { margin: 0; padding-left: 18px }
+.ds-list li { margin: 3px 0 }
+
+@media (max-width: 640px) {
+  .rf-steps { grid-template-columns: 1fr 1fr }
+  .bk-grid { grid-template-columns: 1fr }
+}
+.ds-card .pill, .bf .pill, .hn-card .pill, .rf-item .pill { white-space: normal; text-align: left; line-height: 1.3 }
